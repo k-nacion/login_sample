@@ -10,19 +10,23 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        children: const [
-          Flexible(child: FractionallySizedBox(heightFactor: .25)),
-          _WelcomeTitle(),
-          SizedBox(height: 24),
-          _CreateAccount(),
-          SizedBox(height: 32),
-          _EmailAndPasswordForms(),
-          SizedBox(height: 32),
-          _FormButtons(),
-        ],
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+              const _WelcomeTitle(),
+              const SizedBox(height: 24),
+              const _CreateAccount(),
+              const SizedBox(height: 32),
+              const _EmailAndPasswordForms(),
+              const SizedBox(height: 32),
+              const _FormButtons(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -64,7 +68,7 @@ class _CreateAccount extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: 'Dont\' have an account? ',
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
             children: [
               TextSpan(
                 text: 'Create an account',
@@ -141,39 +145,48 @@ class _FormButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-            padding: const EdgeInsets.symmetric(vertical: 24),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              padding: const EdgeInsets.symmetric(vertical: 24),
+            ),
+            child: Text(
+              'Sign In',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.white),
+            ),
           ),
-          child: Text(
-            'Sign In',
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.white),
-          ),
-        ),
-        const SizedBox(height: 12),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.grey,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-            padding: const EdgeInsets.symmetric(vertical: 24),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FaIcon(FontAwesomeIcons.google, color: Colors.black,),
-              SizedBox(width: 8),
-              Text('Sign In with Google ', style: Theme.of(context).textTheme.labelSmall,),
-            ],
-          ),
-        )
-      ],
+          const SizedBox(height: 12),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey,
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              padding: const EdgeInsets.symmetric(vertical: 24),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const FaIcon(
+                  FontAwesomeIcons.google,
+                  color: Colors.black,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Sign In with Google ',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
